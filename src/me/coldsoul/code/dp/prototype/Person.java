@@ -1,6 +1,14 @@
 package me.coldsoul.code.dp.prototype;
 
-public class Person implements Cloneable {
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Person implements Cloneable, Serializable {
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String country;
 	private School school;
@@ -27,10 +35,35 @@ public class Person implements Cloneable {
 		this.school = school;
 	}
 
+	/**
+	 * 使用java自带的clone 方法copy，缺点是复杂类型的成员变量类型需要实现CloneAble接口，然后挨个去覆写Object类的clone的方法
+	 */
 	@Override
 	public Person clone() throws CloneNotSupportedException {
 		Person p = (Person) super.clone();
 		p.setSchool(school.clone());
+		return p;
+	}
+
+	/**
+	 * 使用序列化与反序列化的方式copy对象，缺点是复杂类型的成员变量按个需要实现Serializable 接口
+	 * 
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public Person clone2() throws IOException, ClassNotFoundException {
+		ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(bao);
+		oos.writeObject(this);
+
+		ByteArrayInputStream bis = new ByteArrayInputStream(bao.toByteArray());
+		ObjectInputStream ois = new ObjectInputStream(bis);
+		Person p = (Person) ois.readObject();
+
+		oos.close();
+		ois.close();
+
 		return p;
 	}
 

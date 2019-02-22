@@ -1,6 +1,9 @@
 package me.coldsoul.code.dp.prototype;
 
-public class School implements Cloneable {
+import java.io.Serializable;
+
+public class School implements Cloneable, Serializable {
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String level;
 
