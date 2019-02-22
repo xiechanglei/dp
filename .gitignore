@@ -1,0 +1,15 @@
+# Maven
+./log/
+target/
+
+# Eclipse
+.classpath
+.settings/
+
+*.class
+
+# Package Files #
+*.war
+*.ear
+/.project
+/bin/
