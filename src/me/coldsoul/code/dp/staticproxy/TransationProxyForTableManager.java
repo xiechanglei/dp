@@ -2,6 +2,9 @@ package me.coldsoul.code.dp.staticproxy;
 
 import me.coldsoul.code.dp._util.LOGGER;
 
+/**
+ * 静态代理，在所有的操作之前开启事务，在操作之后关闭事务
+ */
 public class TransationProxyForTableManager implements TableManager {
 	private TableManager tableManager;
 
