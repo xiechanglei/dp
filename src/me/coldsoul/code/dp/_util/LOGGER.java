@@ -15,4 +15,5 @@ public class LOGGER {
 		}
 		System.out.println(log);
 	}
+	
 }
