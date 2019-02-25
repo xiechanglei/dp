@@ -10,4 +10,8 @@ public class Factory {
 		}
 		return car;
 	}
+
+	public static <T extends Car> Car createCar1(Class<T> c) throws Exception {
+		return c.newInstance();
+	}
 }
